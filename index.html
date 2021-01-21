@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Clock</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+        *{
+            font-family: 'PT Sans Narrow', sans-serif;
+        }
+        .date{
+            font-size: 60px;
+            text-align: center;
+            padding-top: 25%;
+        }
+    </style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="date"></div>
+        <div class="neight" style="text-align: center;">
+            <a id="nightmode">Dark Mode</a><a id="daymode">Day Mode</a>
+        </div>
+    </div>
+    <script>
+        let night=document.getElementById('nightmode')
+        night.addEventListener('click',()=>{
+            document.querySelector('.date').style.color="white"
+            document.body.style.background="black"
+            night.style.color="white"
+            document.getElementById('daymode').style.color="white"
+        })
+        document.getElementById('nightmode').style.paddingRight="30px"
+        let day=document.getElementById('daymode')
+        day.addEventListener('click',()=>{
+            document.querySelector('.date').style.color="black"
+            document.body.style.background="white"
+            night.style.color="black"
+            document.getElementById('daymode').style.color="black"
+        })
+        setInterval(()=>{
+            let datetime=new Date()
+            let time=""
+            if(datetime.getHours()<=12){
+                time+="AM"
+            }
+            else{
+                time+="PM"
+            }
+            let hours=datetime.getHours()
+            if(hours>=12){
+                hours-=12
+            }
+            document.querySelector('.date').innerHTML=`${('0'+hours).slice(-2)} :${('0'+datetime.getMinutes()).slice(-2)}: ${('0'+datetime.getSeconds()).slice(-2)} ${time}<br>${datetime.toDateString()}`
+        },1000)
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
